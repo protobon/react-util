@@ -1,4 +1,5 @@
 import axios from "axios";
+import { refreshAuth } from "../hooks/Auth/useRefreshToken";
 
 const api = axios.create({
     baseURL: "http://localhost:3000/api/",
@@ -15,6 +16,25 @@ api.interceptors.request.use(
     (error) => {
       return Promise.reject(error);
     }
+);
+
+api.interceptors.response.use(
+  (config) => config,
+  async (error) => {
+    if (error.response.status >= 400 && error.response.status <= 500) {
+      if (error.response.status === 401) {
+        try {
+          console.log(localStorage.getItem('refreshToken'));
+          await refreshAuth()
+          // Retry the original request
+          return api.request(error.config);
+        } catch (refreshError) {
+          window.location.href = '/login';
+        }
+      }
+    }
+    return Promise.reject(error);
+  }
 );
 
 export default api;

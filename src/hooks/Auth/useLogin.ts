@@ -1,13 +1,13 @@
 import { useMutation } from "react-query";
-import api from "../common/api";
-import { endpoints } from "../common/endpoints";
+import api from "../../common/api";
+import { endpoints } from "../../common/endpoints";
 
 interface AuthLogin {
     email: string;
     password: string;
 }
 
-interface AuthResponse {
+export interface AuthResponse {
     access_token: string;
     refresh_token: string;
 }
@@ -17,6 +17,9 @@ async function login(input: AuthLogin): Promise<AuthResponse> {
         email: input.email,
         password: input.password
     });
+    localStorage.setItem('email', input.email);
+    localStorage.setItem('authToken', data.access_token);
+    localStorage.setItem('refreshToken', data.refresh_token);
     return data;
 }
 

@@ -1,27 +1,29 @@
 import { useState } from "react";
-import { useLogin } from "../../hooks/useLogin";
+import { useLogin } from "../../../hooks/Auth/useLogin";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const { mutateAsync: login} = useLogin();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email !== "" && password !== "") {
-      const response = await login(
+      await login(
         { email, password },
         {
           onSuccess: (data) => {
               console.log("Login successful!", data);
+              navigate("/home");
           },
           onError: (error) => {
               console.error("Login failed.", error);
           },
         }
       );
-      localStorage.setItem('authToken', response.access_token);
     } else {
       alert("please provide a valid input");
     }
@@ -47,5 +49,3 @@ const Login = () => {
     </form>
   );
 };
-
-export default Login;
