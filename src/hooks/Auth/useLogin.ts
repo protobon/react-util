@@ -13,14 +13,25 @@ export interface AuthResponse {
 }
 
 async function login(input: AuthLogin): Promise<AuthResponse> {
-    const { data } = await api.post<AuthResponse>(endpoints.auth.login, {
-        email: input.email,
-        password: input.password
-    });
-    localStorage.setItem('email', input.email);
-    localStorage.setItem('authToken', data.access_token);
-    localStorage.setItem('refreshToken', data.refresh_token);
-    return data;
+    try {
+        const res = await api.post<AuthResponse>(endpoints.auth.login, {
+            email: input.email,
+            password: input.password
+        });
+    
+        if (res.status !== 200 && res.status !== 201) {
+            throw new Error("Login failed with status " + res.status);
+        }
+    
+        const data = res.data;
+        localStorage.setItem('email', input.email);
+        localStorage.setItem('authToken', data.access_token);
+        localStorage.setItem('refreshToken', data.refresh_token);
+        return data;
+    } catch (error) {
+        console.error(error);
+        throw new Error("Login failed");
+    }
 }
 
 export const useLogin = () => useMutation({mutationFn: login});
