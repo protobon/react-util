@@ -11,6 +11,7 @@ import { useCreateProduct } from "../../../hooks/Product/useCreateProduct";
 import { useNavigate } from "react-router-dom";
 import { useNotification } from "../../../common/context/notification";
 import { Product } from "../../../types/product";
+import Confirm from "../../../common/components/Confirm";
 
 // Validation schema
 const validationSchema = Yup.object({
@@ -29,6 +30,7 @@ const ProductForm: React.FC = () => {
   const { mutateAsync: createProduct, isLoading } = useCreateProduct();
   const navigate = useNavigate();
   const { addNotification } = useNotification();
+  const [showModal, setShowModal] = React.useState(false);
 
   const handleError = (error: Error) => {
     addNotification(error.message);
@@ -43,21 +45,32 @@ const ProductForm: React.FC = () => {
     },
     validationSchema,
     onSubmit: (values, { resetForm }) => {
-      console.log(JSON.stringify(values, null, 2));
-        createProduct(values, {
-          onSuccess: (product) => {
-              resetForm();
-              navigate(`/products/${product._id}`);
-          },
-          onError: (error) => handleError(error as Error),
+      createProduct(values, {
+        onSuccess: (product) => {
+            resetForm();
+            navigate(`/products/${product._id}`);
+        },
+        onError: (error) => handleError(error as Error),
       });
     },
   });
 
+  const handleConfirm = () => {
+    setShowModal(false);
+    formik.handleSubmit();
+  };
+
+  const handleClickOpen = () => {
+    setShowModal(true);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+  };
+
+
   return (
     <Box
-      component="form"
-      onSubmit={formik.handleSubmit}
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -122,13 +135,15 @@ const ProductForm: React.FC = () => {
       />
 
       <Button
-        type="submit"
+        type="button"
         variant="contained"
         color="primary"
         disabled={isLoading}
+        onClick={handleClickOpen}
       >
         {isLoading ? "Creating..." : "Create Product"}
       </Button>
+      {showModal && <Confirm legend="Create Product" open={showModal} onClose={handleClose} onConfirm={handleConfirm} />}
     </Box>
   );
 };

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useLogout } from '../../../hooks/Auth/useLogout';
+import { Box, Button } from '@mui/material';
+import Confirm from '../Confirm';
 
 export const LogoutButton: React.FC = () => {
     const [showModal, setShowModal] = useState(false);
@@ -19,17 +21,15 @@ export const LogoutButton: React.FC = () => {
     };
 
     return (
-        <div>
-            <button onClick={handleLogoutClick}>Logout</button>
-            {showModal && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <p>Logout?</p>
-                        <button onClick={handleConfirmLogout}>Yes</button>
-                        <button onClick={handleCancelLogout}>No</button>
-                    </div>
-                </div>
-            )}
-        </div>
+        <Box>
+            <Button onClick={handleLogoutClick}>Logout</Button>
+            {showModal && 
+            <Confirm 
+            legend="Logout" 
+            open={showModal} 
+            onClose={handleCancelLogout} 
+            onConfirm={handleConfirmLogout} 
+            />}
+        </Box>
     );
 };

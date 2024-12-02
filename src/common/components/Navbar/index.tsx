@@ -4,12 +4,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Box, Button } from '@mui/material';
-import { useLogout } from '../../../hooks/Auth/useLogout';
+import { Box } from '@mui/material';
+import { LogoutButton } from '../Logout';
 
 export const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar }) => {
-    const logout = useLogout();
-
   return (
     <AppBar sx={{
         position: "static",
@@ -29,7 +27,7 @@ export const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar 
             Memes✨
           </Typography>
         </Box>
-        <Button color="inherit" onClick={logout}>Logout</Button>
+        <LogoutButton />
       </Toolbar>
     </AppBar>
   );

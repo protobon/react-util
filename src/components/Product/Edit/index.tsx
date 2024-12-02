@@ -4,6 +4,7 @@ import { useGetProduct } from '../../../hooks/Product/useGetProducts';
 import { CircularProgress, Box, TextField, Button } from '@mui/material';
 import { useUpdateProduct } from '../../../hooks/Product/useUpdateProduct';
 import { useQueryClient } from 'react-query';
+import Confirm from '../../../common/components/Confirm';
 
 
 const EditProduct: React.FC = () => {
@@ -16,6 +17,7 @@ const EditProduct: React.FC = () => {
     const [media, setMedia] = useState('');
     const navigate = useNavigate();
     const queryClient = useQueryClient();
+    const [showModal, setShowModal] = useState(false);
 
     useEffect(() => {
         if (product) {
@@ -44,6 +46,10 @@ const EditProduct: React.FC = () => {
     const handleMediaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setMedia(event.target.value);
     };
+
+    const handleSaveClick = () => {
+        setShowModal(true);
+    }
 
     const handleSave = async () => {
         const mediaArray = media.split(',');
@@ -95,9 +101,10 @@ const EditProduct: React.FC = () => {
                     rows={4}
                 />
                 <Box sx={{ display: "flex", justifyContent: "space-between"}}>
-                    <Button variant="contained" color="primary" onClick={handleSave}>
+                    <Button variant="contained" color="primary" onClick={handleSaveClick}>
                         Save
                     </Button>
+                    {showModal && <Confirm legend="Save" open={showModal} onClose={() => setShowModal(false)} onConfirm={handleSave} />}
                     <Button variant="contained" color="inherit" onClick={() => navigate(-1)}>
                         Cancel
                     </Button>
