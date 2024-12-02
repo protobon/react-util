@@ -6,7 +6,7 @@ import { Navbar } from '../../common/components';
 
 
 export default function Layout() {
-  const [sidebarVisible, setSidebarVisible] = React.useState(true);
+  const [sidebarVisible, setSidebarVisible] = React.useState(false);
 
   const toggleSidebar = () => {
     setSidebarVisible(!sidebarVisible);
