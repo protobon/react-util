@@ -99,6 +99,7 @@ const EditProduct: React.FC = () => {
                     margin="normal"
                     multiline
                     rows={4}
+                    inputProps={{ maxLength: 200 }}
                 />
                 <Box sx={{ display: "flex", justifyContent: "space-between"}}>
                     <Button variant="contained" color="primary" onClick={handleSaveClick}>

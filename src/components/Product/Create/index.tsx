@@ -20,7 +20,7 @@ const validationSchema = Yup.object({
     .string()
     .matches(/^\d+(\.\d{1,2})?$/, "Price must be a valid number")
     .required("Price is required"),
-  description: Yup.string(),
+  description: Yup.string().max(200, "Description can't be longer than 200 characters"),
   media: Yup
     .array()
     .of(Yup.string().url("Media must be a valid URL")),
