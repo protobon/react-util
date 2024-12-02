@@ -26,7 +26,7 @@ export const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar 
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" sx={{ marginX: "15px" }}>
-            Logo
+            Memes✨
           </Typography>
         </Box>
         <Button color="inherit" onClick={logout}>Logout</Button>
