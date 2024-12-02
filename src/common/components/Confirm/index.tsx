@@ -41,7 +41,7 @@ const Confirm: React.FC<ConfirmProps> = ({ legend, open, onClose, onConfirm }) =
                 <Typography>{legend}</Typography>
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose} color="primary">
+                <Button onClick={onClose} color="warning">
                     No
                 </Button>
                 <Button onClick={onConfirm} color="primary" autoFocus>
