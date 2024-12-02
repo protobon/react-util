@@ -31,7 +31,7 @@ export const ErrorPage = () => {
       <Button 
         variant="contained" 
         color="primary" 
-        href="/home"
+        href="/"
         sx={{ marginTop: 2 }}
       >
         Go Back to Home

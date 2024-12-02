@@ -18,7 +18,7 @@ export const Login = () => {
         {
           onSuccess: (data) => {
               console.log("Login successful!", data);
-              navigate("/home");
+              navigate("/");
           },
           onError: (error) => {
               console.error("Login failed.", error);

@@ -24,7 +24,7 @@ const menuItems: ListItemLinkProps[] = [
     {
       icon: <Home/>,
       primary: "Home",
-      to: "/home"
+      to: "/"
     },
     {
       icon: <Star/>,
@@ -43,6 +43,7 @@ export const Sidebar: React.FC = () => {
           display: 'flex',
           flexDirection: 'column',
           borderRight: '1px solid #ddd',
+          boxShadow: '0 0 10px rgba(0, 0, 0, 0.3)',
           overflowY: 'auto',
         }}
     >
