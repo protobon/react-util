@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 
 // Components
-import { Login, CustomError } from "./common/components";
+import { Login, ErrorPage } from "./common/components";
 
 import Layout from "./components/Layout";
 import HomePage from "./components/Home";
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
-      errorElement: <CustomError />,
+      errorElement: <ErrorPage />,
       children: [
         {
           path: "/home",

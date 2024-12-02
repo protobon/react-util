@@ -1,7 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
 import { useRouteError } from "react-router-dom";
 
-export const CustomError = () => {
+export const ErrorPage = () => {
   const error = useRouteError() as Error;
 
   return (
