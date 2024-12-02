@@ -1,19 +1,14 @@
 import { Grid2 } from '@mui/material';
 import ProductCard from '../Card';
-import { useLoaderData, useParams } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { Product } from '../../../types/product';
-import ProductDetail from '../Detail';
 
-const ProductsPage = () => {
-  const { id } = useParams<string>();
-
-  if (id) return <ProductDetail/>;
-
+const ProductsGrid = () => {
   const products = useLoaderData() as Product[]
 
   return (
     <div style={{ padding: 10 }}>
-      <h1>Products</h1>
+      <h1>Browse Products</h1>
       <Grid2 
         container
         spacing={2}
@@ -31,4 +26,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default ProductsGrid;

@@ -3,7 +3,7 @@ import { PaginationInput } from "./pagination";
 export interface Product {
     _id?: string;
     name?: string;
-    price?: number;
+    price?: string;
     description?: string;
     media?: string[];
 }

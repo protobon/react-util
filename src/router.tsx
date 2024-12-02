@@ -5,11 +5,14 @@ import { Login, CustomError } from "./common/components";
 
 import Layout from "./components/Layout";
 import HomePage from "./components/Home";
-import ProductsPage from "./components/Product/List";
+import ProductsPage from "./components/Product";
+import ProductDetail from "./components/Product/Detail";
+import ProductForm from "./components/Product/Create";
+import ProductsGrid from "./components/Product/List";
 
 // Loaders
 import { productsLoader } from "./hooks/Product/useGetProducts";
-import ProductDetail from "./components/Product/Detail";
+
 
 const router = createBrowserRouter([
     {
@@ -28,8 +31,16 @@ const router = createBrowserRouter([
         {
           path: "/products",
           element: <ProductsPage />,
-          loader: productsLoader,
           children: [
+            {
+              path: "/products",
+              element: <ProductsGrid />,
+              loader: productsLoader,
+            },
+            {
+              path: "create",
+              element: <ProductForm />,
+            },
             {
               path: ":id",
               element: <ProductDetail />,
