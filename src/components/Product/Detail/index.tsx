@@ -14,7 +14,7 @@ const ProductDetail: React.FC = () => {
 
     return (
         <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} height="100vh">
-            <Box flex={1} mb={{ xs: 5, md: 1 }}>
+            <Box flex={1} mb={{ xs: 4, md: 1 }} paddingX={{ md: 2 }}>
             {product?.media && product.media.length > 0 ? (
                 <Carousel
                 images={product.media.map((src) => ({

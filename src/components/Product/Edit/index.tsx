@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGetProduct } from '../../../hooks/Product/useGetProducts';
-import { CircularProgress, Typography, Box, TextField, Button } from '@mui/material';
-import { Carousel } from '../../../common/components';
+import { CircularProgress, Box, TextField, Button } from '@mui/material';
 import { useUpdateProduct } from '../../../hooks/Product/useUpdateProduct';
 import { useQueryClient } from 'react-query';
 
@@ -14,6 +13,7 @@ const EditProduct: React.FC = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
+    const [media, setMedia] = useState('');
     const navigate = useNavigate();
     const queryClient = useQueryClient();
 
@@ -22,6 +22,7 @@ const EditProduct: React.FC = () => {
             setName(product?.name ?? '');
             setDescription(product?.description ?? '');
             setPrice(product?.price ?? '');
+            setMedia(product?.media?.join(',') ?? '');
         }
     }, [product]);
 
@@ -40,27 +41,36 @@ const EditProduct: React.FC = () => {
         setPrice(event.target.value);
     };
 
+    const handleMediaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setMedia(event.target.value);
+    };
+
     const handleSave = async () => {
-        await updateProduct({ _id: id, name, description, price });
+        const mediaArray = media.split(',');
+        await updateProduct({ _id: id, name, description, price, media: mediaArray });
         queryClient.invalidateQueries(['products', id]);
         navigate(-1);
     };
 
     return (
-        <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} height="100vh">
-            <Box flex={1} mb={{ xs: 5, md: 1 }}>
-            {product?.media && product.media.length > 0 ? (
-                <Carousel
-                images={product.media.map((src) => ({
-                    src,
-                    alt: "Product image",
-                }))}
+        <Box 
+        sx={{
+            display: "flex",
+            flexDirection: { xs: 'column', md: 'row' },
+            height: "100vh",
+            justifyContent: "space-between",
+        }}
+        >
+            <Box flex={1} mb={{ xs: 5, md: 1 }} paddingX={{ xs: 1, md: 3 }}>
+                <TextField
+                    label="Media"
+                    value={media}
+                    onChange={handleMediaChange}
+                    fullWidth
+                    margin="normal"
                 />
-            ) : (
-                <Typography variant="body2">No media available</Typography>
-            )}
             </Box>
-            <Box flex={1} ml={{ lg: 2 }}>
+            <Box flex={1}>
                 <TextField
                     label="Product Name"
                     value={name}
