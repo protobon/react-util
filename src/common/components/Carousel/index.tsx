@@ -24,7 +24,8 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
     sx={{
       position: "relative",
       maxWidth: "100%",
-      maxHeight: "auto",
+      maxHeight: "100%",
+      objectFit: "contain",
       overflow: "hidden",
     }}
     >
@@ -43,8 +44,8 @@ export const Carousel: React.FC<CarouselProps> = ({ images }) => {
             alt={image.alt}
             sx={{
               width: "100%",
-              height: "auto",
-              objectFit: "contain",
+              height: "100%",
+              margin: 0,
             }}
           />
         ))}

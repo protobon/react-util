@@ -18,7 +18,7 @@ export default function ProductCard({ product }: { product: Product }) {
           title="product"
         />
       </Link>
-      <CardContent sx={{ height: 250}}>
+      <CardContent sx={{ height: 200}}>
         <Box sx={{ display: "flex", justifyContent: "space-between"}}>
           <Link to={`/products/${product._id}`} style={{ textDecoration: 'none' }}>
             <Typography gutterBottom variant="h6" component="div">
