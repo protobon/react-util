@@ -69,7 +69,7 @@ const ProductHeader: React.FC = () => {
             <Typography variant="h4" style={{ flexGrow: 1, textAlign: "center" }}>
                 Products
             </Typography>
-            <Box>
+            <Box sx={{ m: 2 }}>
                 <IconButton
                     edge="end"
                     color="inherit"
