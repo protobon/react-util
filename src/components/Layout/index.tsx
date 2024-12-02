@@ -8,6 +8,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import DraftsIcon from '@mui/icons-material/Drafts';
 import { Link, Outlet } from 'react-router-dom';
+import { useLogout } from '../../hooks/Auth/useLogout';
 
 interface ListItemLinkProps {
   icon?: React.ReactElement<unknown>;
@@ -45,6 +46,8 @@ const menuItems: ListItemLinkProps[] = [
 ]
 
 export default function Layout() {
+  const logout = useLogout();
+
   return (
     <Box sx={{ display: 'flex', height: '100vh', width: "100%" }}>
       {/* Sidebar */}
@@ -56,6 +59,7 @@ export default function Layout() {
           display: 'flex',
           flexDirection: 'column',
           borderRight: { md: '1px solid #ddd', xs: 'none' },
+          overflowY: 'auto',
         }}
       >
         <Paper
@@ -72,6 +76,15 @@ export default function Layout() {
             ))}
           </List>
         </Paper>
+        <Box sx={{ position: 'fixed', bottom: 0 }}>
+          <List aria-label="secondary mailbox folders">
+            <ListItem key="Logout" disablePadding>
+              <ListItemButton onClick={logout}>
+                <ListItemText primary="Logout" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Box>
       </Box>
 
       {/* Content Area */}

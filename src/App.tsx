@@ -3,10 +3,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import { productsLoader } from './hooks/Product/useGetAllProducts';
+import { productsLoader } from './hooks/Product/useGetProducts';
 import Layout from './components/Layout';
 import HomePage from './components/Home';
-import Login from './common/auth/login';
+import { Login } from './common/components';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +21,6 @@ const router = createBrowserRouter([
         path: "/",
         element: <HomePage />
       },
-
       {
         path: "/products",
         element: <ProductsPage />,
