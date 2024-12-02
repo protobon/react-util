@@ -9,9 +9,12 @@ import { Link } from 'react-router-dom';
 import { Box, Tooltip } from '@mui/material';
 import { useState } from 'react';
 import { Check } from '@mui/icons-material';
+import { useCart } from '../../../common/context/cart';
+import { CartItem } from '../../../types/cart';
 
 export default function ProductCard({ product }: { product: Product }) {
   const [copied, setCopied] = useState(false);
+  const { addToCart } = useCart();
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href + `/${product._id}`)
@@ -33,7 +36,7 @@ export default function ProductCard({ product }: { product: Product }) {
           title="product"
         />
       </Link>
-      <CardContent sx={{ height: 200}}>
+      <CardContent sx={{ height: 200 }}>
         <Box sx={{ display: "flex", justifyContent: "space-between"}}>
           <Link to={`/products/${product._id}`} style={{ textDecoration: 'none' }}>
             <Typography gutterBottom variant="h6" component="div">
@@ -55,6 +58,9 @@ export default function ProductCard({ product }: { product: Product }) {
           {copied ? <Check /> : 'Copy'}
         </Button>
         <Link to={`/products/${product._id}`}><Button size="small">Details</Button></Link>
+        <Button size="small" onClick={() => addToCart({quantity: 1, ...product} as CartItem)}>
+          Add to Cart
+        </Button>
       </CardActions>
     </Card>
   );

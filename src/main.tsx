@@ -5,6 +5,7 @@ import App from './App.tsx'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { NotificationProvider } from './common/context/notification.tsx'
 import Notification from './common/components/Notification/index.tsx'
+import { CartProvider } from './common/context/cart.tsx'
 
 
 const queryClient = new QueryClient({
@@ -21,7 +22,9 @@ createRoot(document.getElementById('root')!).render(
     <QueryClientProvider client={queryClient}>
       <NotificationProvider>
         <Notification />
-        <App />
+        <CartProvider>
+          <App/>
+        </CartProvider>
       </NotificationProvider>
     </QueryClientProvider>
   </StrictMode>,

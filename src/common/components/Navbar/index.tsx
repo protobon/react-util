@@ -4,10 +4,16 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { LogoutButton } from '../Logout';
+import { ShoppingCart } from '@mui/icons-material';
 
-export const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar }) => {
+interface NavbarProps {
+    toggleSidebar: () => void;
+    toggleCart: () => void;
+}
+
+export const Navbar: React.FC<NavbarProps> = ({ toggleSidebar, toggleCart }) => {
   return (
     <AppBar sx={{
         position: "static",
@@ -27,6 +33,9 @@ export const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar 
             Memes✨
           </Typography>
         </Box>
+        <Button sx={{ marginX: 1 }} color="inherit" onClick={toggleCart}>
+          <ShoppingCart/>
+        </Button>
         <LogoutButton />
       </Toolbar>
     </AppBar>
