@@ -56,11 +56,20 @@ const ProductHeader: React.FC = () => {
             padding: '15px',
             marginBottom: '20px',
         }}>
-            <ArrowBack sx={{ cursor: "pointer", m: 2, left: 2, bottom: 1 }} onClick={() => navigate("/products")}/>
-            <Typography variant="h4" style={{ flexGrow: 1 }}>
+            <ArrowBack 
+            sx={{ 
+                cursor: "pointer",
+                m: 2,
+                left: 2,
+                bottom: 1 
+            }} 
+            onClick={() => {
+                window.location.pathname === '/products' ? navigate('/') : navigate('/products');
+            }}/>
+            <Typography variant="h4" style={{ flexGrow: 1, textAlign: "center" }}>
                 Products
             </Typography>
-            <div>
+            <Box>
                 <IconButton
                     edge="end"
                     color="inherit"
@@ -90,7 +99,7 @@ const ProductHeader: React.FC = () => {
                         <MenuItem key={index} onClick={item.onClick}>{item.label}</MenuItem>
                     ))}
                 </Menu>
-            </div>
+            </Box>
         </Box>
     );
 };
