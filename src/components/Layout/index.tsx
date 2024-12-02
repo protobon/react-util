@@ -15,15 +15,19 @@ export default function Layout() {
   return (
     <Box sx={{ display: 'flex', flexDirection: "column", height: '100vh', width: "100%" }}>
       <Navbar toggleSidebar={toggleSidebar} />
-      <Box sx={{ display: "flex" }}>
-        {sidebarVisible && (<Sidebar />)}
+      <Box sx={{ display: "flex", flex: 1, overflow: 'hidden' }}>
+        {sidebarVisible && (
+          <Box sx={{ overflow: 'auto' }}>
+            <Sidebar />
+          </Box>
+        )}
 
         {/* Content Area */}
         <Box
           sx={{
             flex: 1,
             padding: 2,
-            overflowY: 'auto',
+            overflow: 'auto',
           }}
         >
           <Outlet />
