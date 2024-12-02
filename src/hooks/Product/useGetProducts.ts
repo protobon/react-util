@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { Product, ProductFilters } from '../../types/product';
 import api from "../../common/api";
 import { endpoints } from "../../common/endpoints";
-import { LoaderFunctionArgs } from "react-router-dom";
+import { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 
 const fetchProducts = async (filters: ProductFilters): Promise<Product[]> => {
   try {
@@ -50,7 +50,7 @@ export const useFindProducts = (filters: ProductFilters) => {
     });
 };
 
-export const productsLoader = async ({ request }: LoaderFunctionArgs) => {
+export const productsLoader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const filters: ProductFilters = {
     id: url.searchParams.getAll("id"),
@@ -62,4 +62,34 @@ export const productsLoader = async ({ request }: LoaderFunctionArgs) => {
   };
 
   return fetchProducts(filters);
+};
+
+const fetchOneProduct = async (id?: string): Promise<Product> => {
+  try {
+    if (!id) throw new Error("No product id provided");
+
+    const res = await api.get<Product>(endpoints.products.byId(id));
+
+    if (res.status !== 200 && res.status !== 201) {
+      throw new Error("Error fetching product");
+    }
+  
+    const product = res.data;
+    if (!product) throw new Error("Product not found");
+
+    return product;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error fetching product");
+  }
+};
+
+export const useGetProduct = (id?: string) => {
+  return useQuery(
+    ['product', id],
+    () => fetchOneProduct(id),
+    {
+      retry: false,
+    }
+  );
 };

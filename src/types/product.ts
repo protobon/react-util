@@ -5,6 +5,7 @@ export interface Product {
     name?: string;
     price?: number;
     description?: string;
+    media?: string[];
 }
 
 export interface ProductFilters extends PaginationInput {

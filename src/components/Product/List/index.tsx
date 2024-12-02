@@ -1,9 +1,14 @@
 import { Grid2 } from '@mui/material';
 import ProductCard from '../Card';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 import { Product } from '../../../types/product';
+import ProductDetail from '../Detail';
 
 const ProductsPage = () => {
+  const { id } = useParams<string>();
+
+  if (id) return <ProductDetail/>;
+
   const products = useLoaderData() as Product[]
 
   return (
