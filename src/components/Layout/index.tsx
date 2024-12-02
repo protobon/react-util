@@ -15,9 +15,16 @@ export default function Layout() {
   return (
     <Box sx={{ display: 'flex', flexDirection: "column", height: '100vh', width: "100%" }}>
       <Navbar toggleSidebar={toggleSidebar} />
-      <Box sx={{ display: "flex", flex: 1, overflow: 'hidden' }}>
+      <Box sx={{ display: "flex", flex: 1, overflow: "hidden", position: "relative" }}>
         {sidebarVisible && (
-          <Box sx={{ overflow: 'auto' }}>
+          <Box sx={{
+          position: "absolute",
+          zIndex: 1000,
+          overflow: "hidden",
+          height: '100%',
+          }}
+          onClick={toggleSidebar}
+          >
             <Sidebar />
           </Box>
         )}
@@ -29,6 +36,7 @@ export default function Layout() {
             padding: 2,
             overflow: 'auto',
           }}
+          onClick={() => setSidebarVisible(false)}
         >
           <Outlet />
         </Box>

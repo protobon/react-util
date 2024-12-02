@@ -37,7 +37,7 @@ export const Sidebar: React.FC = () => {
     return (
     <Box
         sx={{
-          width: "200px",
+          width: '200px',
           height: '100%',
           backgroundColor: 'background.paper',
           display: 'flex',
@@ -53,7 +53,7 @@ export const Sidebar: React.FC = () => {
             flex: 1,
           }}
         >
-          <List aria-label="main mailbox folders">
+          <List aria-label="menu items">
             {menuItems.map((item) => (
               <ListItem key={item.to} disablePadding>
                 <ListItemLink to={item.to} primary={item.primary} icon={item.icon}/>
