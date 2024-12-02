@@ -9,15 +9,15 @@ import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <Card sx={{ maxWidth: 345, margin: "auto", }}>
+    <Card sx={{ maxWidth: 400, margin: "auto" }}>
       <Link to={`/products/${product._id}`}>
         <CardMedia
-          sx={{ height: 140 }}
+          sx={{ height: 250 }}
           image={product?.media?.length ? product.media[0] : "/static/images/cards/product.jpeg"}
           title="product"
         />
       </Link>
-      <CardContent>
+      <CardContent sx={{ height: 120}}>
         <Link to={`/products/${product._id}`} style={{ textDecoration: 'none' }}>
           <Typography gutterBottom variant="h6" component="div">
             {product?.name}
