@@ -7,8 +7,23 @@ import Typography from '@mui/material/Typography';
 import { Product } from '../../../types/product';
 import { Link } from 'react-router-dom';
 import { Box, Tooltip } from '@mui/material';
+import { useState } from 'react';
+import { Check } from '@mui/icons-material';
 
 export default function ProductCard({ product }: { product: Product }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href + `/${product._id}`)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+  };
+
   return (
     <Card sx={{ maxWidth: 400, margin: "auto" }}>
       <Link to={`/products/${product._id}`}>
@@ -36,7 +51,9 @@ export default function ProductCard({ product }: { product: Product }) {
         </Tooltip>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
+        <Button size="small" onClick={handleShare}>
+          {copied ? <Check /> : 'Copy'}
+        </Button>
         <Link to={`/products/${product._id}`}><Button size="small">Details</Button></Link>
       </CardActions>
     </Card>
