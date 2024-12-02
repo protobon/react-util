@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { Product, ProductFilters } from './../../types/product';
+import { Product, ProductFilters } from '../../types/product';
 import api from "../../common/api";
 import { endpoints } from "../../common/endpoints";
 import { LoaderFunctionArgs } from "react-router-dom";
