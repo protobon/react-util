@@ -16,10 +16,6 @@ export const LogoutButton: React.FC = () => {
         setShowModal(false);
     };
 
-    const handleCancelLogout = () => {
-        setShowModal(false);
-    };
-
     return (
         <Box>
             <Button onClick={handleLogoutClick}>Logout</Button>
@@ -27,7 +23,7 @@ export const LogoutButton: React.FC = () => {
             <Confirm 
             legend="Logout" 
             open={showModal} 
-            onClose={handleCancelLogout} 
+            onClose={() => setShowModal(false)} 
             onConfirm={handleConfirmLogout} 
             />}
         </Box>
