@@ -37,7 +37,6 @@ const fetchProducts = async (filters: ProductFilters): Promise<Product[]> => {
   
     return res.data;
   } catch (error) {
-    console.error(error);
     throw new Error("Error fetching products");
   }
 };
@@ -79,7 +78,6 @@ const fetchOneProduct = async (id?: string): Promise<Product> => {
 
     return product;
   } catch (error) {
-    console.error(error);
     throw new Error("Error fetching product");
   }
 };

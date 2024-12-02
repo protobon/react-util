@@ -29,7 +29,6 @@ async function login(input: AuthLogin): Promise<AuthResponse> {
         localStorage.setItem('refreshToken', data.refresh_token);
         return data;
     } catch (error) {
-        console.error(error);
         throw new Error("Login failed");
     }
 }

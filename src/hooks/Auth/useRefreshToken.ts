@@ -29,7 +29,6 @@ export async function refreshAuth(): Promise<void> {
         localStorage.setItem('authToken', data.access_token);
         localStorage.setItem('refreshToken', data.refresh_token);
     } catch (error) {
-        console.error(error);
         throw new Error("Refresh auth failed");
     }
 }
