@@ -1,11 +1,12 @@
 import React from 'react';
 import { Typography, IconButton, Menu, MenuItem, Box } from '@mui/material';
 import { ArrowBack, Menu as MenuIcon } from '@mui/icons-material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ProductMenuItem } from '../../../types/product';
 
 const ProductHeader: React.FC = () => {
     const [targetEl, setTargetElement] = React.useState<null | HTMLElement>(null);
+    const { id } = useParams<string>();
     const navigate = useNavigate();
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -24,7 +25,7 @@ const ProductHeader: React.FC = () => {
     
     const handleEditProduct = () => {
         handleClose();
-        console.log('Edit Product clicked');
+        navigate('/products/' + id + '/edit');
     };
     
     const handleDeleteProduct = () => {
@@ -37,10 +38,10 @@ const ProductHeader: React.FC = () => {
             "label": "Create Product",
             "onClick": handleCreateProduct,
         },
-        {
+        ...(id ? [{
             "label": "Edit Product",
             "onClick": handleEditProduct,
-        },
+        }] : []),
         {
             "label": "Delete Product",
             "onClick": handleDeleteProduct,

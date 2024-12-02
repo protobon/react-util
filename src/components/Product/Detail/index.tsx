@@ -4,9 +4,9 @@ import { useGetProduct } from '../../../hooks/Product/useGetProducts';
 import { CircularProgress, Typography, Box } from '@mui/material';
 import { Carousel } from '../../../common/components';
 
+
 const ProductDetail: React.FC = () => {
     const { id } = useParams<string>();
-    
     const { data: product, isLoading, error } = useGetProduct(id);
 
     if (isLoading) return <CircularProgress />;
@@ -28,6 +28,7 @@ const ProductDetail: React.FC = () => {
             </Box>
             <Box flex={1} ml={{ lg: 2 }}>
                 <Typography variant="h4" gutterBottom>{product?.name}</Typography>
+                <Typography variant="h6" gutterBottom>{`$ ${product?.price}`}</Typography>
                 <Typography variant="body1">{product?.description}</Typography>
             </Box>
         </Box>
