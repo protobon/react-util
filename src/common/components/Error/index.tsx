@@ -31,7 +31,7 @@ export const CustomError = () => {
       <Button 
         variant="contained" 
         color="primary" 
-        href="/"
+        href="/home"
         sx={{ marginTop: 2 }}
       >
         Go Back to Home

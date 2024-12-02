@@ -30,13 +30,8 @@ function ListItemLink(props: ListItemLinkProps) {
 const menuItems: ListItemLinkProps[] = [
   {
     icon: <DraftsIcon/>,
-    primary: "Login",
-    to: "/login"
-  },
-  {
-    icon: <DraftsIcon/>,
     primary: "Home",
-    to: "/"
+    to: "/home"
   },
   {
     icon: <DraftsIcon/>,
