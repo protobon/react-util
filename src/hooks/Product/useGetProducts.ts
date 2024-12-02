@@ -2,9 +2,8 @@ import { useQuery } from "react-query";
 import { Product, ProductFilters } from '../../types/product';
 import api from "../../common/api";
 import { endpoints } from "../../common/endpoints";
-import { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 
-const fetchProducts = async (filters: ProductFilters): Promise<Product[]> => {
+export const fetchProducts = async (filters: ProductFilters): Promise<Product[]> => {
   try {
     const params = new URLSearchParams();
   
@@ -41,27 +40,6 @@ const fetchProducts = async (filters: ProductFilters): Promise<Product[]> => {
   }
 };
 
-export const useFindProducts = (filters: ProductFilters) => {
-    return useQuery({
-        queryKey: ['products', filters],
-        queryFn: () => fetchProducts(filters),
-        keepPreviousData: true,
-    });
-};
-
-export const productsLoader: LoaderFunction = async ({ request }: LoaderFunctionArgs) => {
-  const url = new URL(request.url);
-  const filters: ProductFilters = {
-    id: url.searchParams.getAll("id"),
-    name: url.searchParams.getAll("name"),
-    minPrice: url.searchParams.get("minPrice") || undefined,
-    maxPrice: url.searchParams.get("maxPrice") || undefined,
-    page: url.searchParams.get("page") ? parseInt(url.searchParams.get("page")!) : undefined,
-    limit: url.searchParams.get("limit") ? parseInt(url.searchParams.get("limit")!) : undefined,
-  };
-
-  return fetchProducts(filters);
-};
 
 const fetchOneProduct = async (id?: string): Promise<Product> => {
   try {

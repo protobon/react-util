@@ -2,7 +2,6 @@ import { createBrowserRouter } from "react-router-dom";
 
 // Components
 import { Login, ErrorPage } from "./common/components";
-
 import Layout from "./components/Layout";
 import HomePage from "./components/Home";
 import ProductsPage from "./components/Product";
@@ -10,9 +9,6 @@ import ProductDetail from "./components/Product/Detail";
 import ProductForm from "./components/Product/Create";
 import ProductsGrid from "./components/Product/List";
 import EditProduct from "./components/Product/Edit";
-
-// Loaders
-import { productsLoader } from "./hooks/Product/useGetProducts";
 
 
 const router = createBrowserRouter([
@@ -36,7 +32,6 @@ const router = createBrowserRouter([
             {
               path: "/products",
               element: <ProductsGrid />,
-              loader: productsLoader,
             },
             {
               path: "create",
