@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLogin } from "../../../hooks/Auth/useLogin";
 import { useNavigate } from "react-router-dom";
+import { Box, Button, Container, TextField, Typography } from "@mui/material";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -30,22 +31,55 @@ export const Login = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-          type="email"
-          placeholder="Email"
+  <Container component="main" maxWidth="xs">
+    <Box
+      sx={{
+        marginTop: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Typography component="h1" variant="h5">
+        Login
+      </Typography>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          id="email"
+          label="Email Address"
+          name="email"
+          autoComplete="email"
+          autoFocus
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
+        />
+        <TextField
+          variant="outlined"
+          margin="normal"
+          required
+          fullWidth
+          name="password"
+          label="Password"
           type="password"
-          placeholder="Password"
+          id="password"
+          autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">
+        />
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+        >
           Login
-      </button>
-    </form>
+        </Button>
+      </Box>
+    </Box>
+  </Container>
   );
 };
