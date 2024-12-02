@@ -6,5 +6,6 @@ export const endpoints: any = {
     },
     products: {
         default: "products",
+        byId: (id: string) => `products/${id}`,
     },
 }
