@@ -5,6 +5,7 @@ import { endpoints } from "../../common/endpoints";
 import { LoaderFunctionArgs } from "react-router-dom";
 
 const fetchProducts = async (filters: ProductFilters): Promise<Product[]> => {
+  try {
     const params = new URLSearchParams();
   
     if (filters.id) {
@@ -26,11 +27,19 @@ const fetchProducts = async (filters: ProductFilters): Promise<Product[]> => {
       params.append('limit', filters.limit.toString());
     }
   
-    const { data } = await api.get<Product[]>(endpoints.products.default, {
+    const res = await api.get<Product[]>(endpoints.products.default, {
       params,
     });
+
+    if (res.status !== 200 && res.status !== 201) {
+      throw new Error("Error fetching products");
+    }
   
-    return data;
+    return res.data;
+  } catch (error) {
+    console.error(error);
+    throw new Error("Error fetching products");
+  }
 };
 
 export const useFindProducts = (filters: ProductFilters) => {
