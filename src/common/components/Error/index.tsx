@@ -18,9 +18,9 @@ export const ErrorPage = () => {
       }}
     >
       <img 
-        src="https://via.placeholder.com/300" 
+        src="https://i.pinimg.com/736x/b7/42/c4/b742c4a221202a27f680ffe32a627ecf.jpg" 
         alt="Error illustration" 
-        style={{ marginBottom: "20px", maxWidth: "100%", height: "auto" }} 
+        style={{ marginBottom: "20px", maxWidth: "300px", maxHeight: "300px" }} 
       />
       <Typography variant="h2" color="text.primary" gutterBottom>
         Oops! An unexpected error occurred.
