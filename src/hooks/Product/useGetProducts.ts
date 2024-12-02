@@ -26,7 +26,7 @@ const fetchProducts = async (filters: ProductFilters): Promise<Product[]> => {
     if (filters.limit) {
       params.append('limit', filters.limit.toString());
     }
-  
+
     const res = await api.get<Product[]>(endpoints.products.default, {
       params,
     });

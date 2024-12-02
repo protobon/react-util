@@ -14,3 +14,8 @@ export interface ProductFilters extends PaginationInput {
     minPrice?: string;
     maxPrice?: string;
 }
+
+export interface ProductMenuItem {
+    label: string;
+    onClick: () => void;
+}

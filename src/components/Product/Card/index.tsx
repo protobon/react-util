@@ -5,30 +5,27 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Product } from '../../../types/product';
-import { Container } from '@mui/material';
 import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, margin: "auto", }}>
       <Link to={`/products/${product._id}`}>
         <CardMedia
           sx={{ height: 140 }}
-          image="/static/images/cards/product.jpeg"
+          image={product?.media?.length ? product.media[0] : "/static/images/cards/product.jpeg"}
           title="product"
         />
       </Link>
       <CardContent>
-        <Container sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-          <Link to={`/products/${product._id}`}>
-            <Typography gutterBottom variant="h5" component="div">
-              {product?.name}
-            </Typography>
-          </Link>
-          <Typography variant='h5' component="div">
-            {product?.price}
+        <Link to={`/products/${product._id}`} style={{ textDecoration: 'none' }}>
+          <Typography gutterBottom variant="h6" component="div">
+            {product?.name}
           </Typography>
-        </Container>
+        </Link>
+        <Typography variant='body1' component="div">
+          $ {product?.price}
+        </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
           {product?.description}
         </Typography>
