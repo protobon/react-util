@@ -7,7 +7,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem('authToken');
+      const token = localStorage.getItem('authToken') || "";
       if (token) {
         config.headers.Authorization = `Bearer ${token}`;
       }
@@ -24,7 +24,6 @@ api.interceptors.response.use(
     if (error.response.status >= 400 && error.response.status <= 500) {
       if (error.response.status === 401) {
         try {
-          console.log(localStorage.getItem('refreshToken'));
           await refreshAuth()
           // Retry the original request
           return api.request(error.config);
