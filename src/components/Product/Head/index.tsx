@@ -56,7 +56,7 @@ const ProductHeader: React.FC = () => {
             padding: '15px',
             marginBottom: '20px',
         }}>
-            <ArrowBack sx={{ cursor: "pointer", m: 2, left: 2, bottom: 1 }} onClick={() => navigate(-1)}/>
+            <ArrowBack sx={{ cursor: "pointer", m: 2, left: 2, bottom: 1 }} onClick={() => navigate("/products")}/>
             <Typography variant="h4" style={{ flexGrow: 1 }}>
                 Products
             </Typography>
